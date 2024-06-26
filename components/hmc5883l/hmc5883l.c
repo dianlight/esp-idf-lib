@@ -148,7 +148,7 @@ esp_err_t hmc5883l_init(hmc5883l_dev_t *dev)
     if (id != HMC5883L_ID)
     {
         I2C_DEV_GIVE_MUTEX(&dev->i2c_dev);
-        ESP_LOGE(TAG, "Unknown ID: 0x%08x != 0x%08x", id, HMC5883L_ID);
+        ESP_LOGE(TAG, "Unknown ID: 0x%08lx != 0x%08x", id, HMC5883L_ID);
         return ESP_ERR_NOT_FOUND;
     }
 

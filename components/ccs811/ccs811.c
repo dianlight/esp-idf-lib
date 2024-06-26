@@ -114,12 +114,12 @@ typedef struct
 
 static esp_err_t read_reg_nolock(ccs811_dev_t *dev, uint8_t reg, uint8_t *data, uint32_t len)
 {
-    ESP_LOGD(TAG, "Read %d byte from i2c slave starting at reg addr %02x.", len, reg);
+    ESP_LOGD(TAG, "Read %lu byte from i2c slave starting at reg addr %02x.", len, reg);
 
     esp_err_t res = i2c_dev_read_reg(&dev->i2c_dev, reg, data, len);
     if (res != ESP_OK)
     {
-        ESP_LOGE(TAG, "Error %d on read %d byte from I2C slave reg addr %02x.", res, len, reg);
+        ESP_LOGE(TAG, "Error %d on read %lu byte from I2C slave reg addr %02x.", res, len, reg);
         return res;
     }
 
@@ -128,12 +128,12 @@ static esp_err_t read_reg_nolock(ccs811_dev_t *dev, uint8_t reg, uint8_t *data, 
 
 static esp_err_t write_reg_nolock(ccs811_dev_t *dev, uint8_t reg, uint8_t *data, uint32_t len)
 {
-    ESP_LOGD(TAG, "Write %d bytes to i2c slave starting at reg addr %02x", len, reg);
+    ESP_LOGD(TAG, "Write %lu bytes to i2c slave starting at reg addr %02x", len, reg);
 
     esp_err_t res = i2c_dev_write_reg(&dev->i2c_dev, reg, data, len);
     if (res != ESP_OK)
     {
-        ESP_LOGE(TAG, "Error %d on write %d byte to i2c slave register %02x.", res, len, reg);
+        ESP_LOGE(TAG, "Error %d on write %lu byte to i2c slave register %02x.", res, len, reg);
         return res;
     }
 

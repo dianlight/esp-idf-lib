@@ -38,6 +38,7 @@
 
 #include <esp_err.h>
 #include <esp_log.h>
+
 #if CONFIG_IDF_TARGET_ESP32
 #include <esp32/rom/ets_sys.h>
 #elif CONFIG_IDF_TARGET_ESP32S2
@@ -50,6 +51,8 @@
 #include <esp32h2/rom/ets_sys.h>
 #elif CONFIG_IDF_TARGET_ESP32C2
 #include <esp32c2/rom/ets_sys.h>
+#elif CONFIG_IDF_TARGET_ESP32C6
+#include <esp32c6/rom/ets_sys.h>
 #endif
 #include <esp_idf_lib_helpers.h>
 
@@ -232,7 +235,7 @@ esp_err_t bmp180_measure(bmp180_dev_t *dev, float *temperature, uint32_t *pressu
     if (temperature)
         *temperature = T / 10.0;
 
-    ESP_LOGD(TAG, "T:= %d.%d", T / 10, abs(T % 10));
+    ESP_LOGD(TAG, "T:= %lu.%d", T / 10, abs(T % 10));
 
     if (pressure)
     {
@@ -266,7 +269,7 @@ esp_err_t bmp180_measure(bmp180_dev_t *dev, float *temperature, uint32_t *pressu
 
         *pressure = P;
 
-        ESP_LOGD(TAG, "P:= %d", P);
+        ESP_LOGD(TAG, "P:= %lu", P);
     }
 
     I2C_DEV_GIVE_MUTEX(&dev->i2c_dev);
