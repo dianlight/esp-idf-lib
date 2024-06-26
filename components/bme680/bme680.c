@@ -329,7 +329,7 @@ static esp_err_t bme680_get_raw_data(bme680_t *dev, bme680_raw_data_t *raw_data)
      * BME680_REG_MEAS_STATUS_1, BME680_REG_MEAS_STATUS_2
      * These data are not documented and it is not really clear when they are filled
      */
-    ESP_LOGD(TAG, "Raw data: %d %d %d %d %d", raw_data->temperature, raw_data->pressure,
+    ESP_LOGD(TAG, "Raw data: %lu %lu %d %d %d", raw_data->temperature, raw_data->pressure,
             raw_data->humidity, raw_data->gas_resistance, raw_data->gas_range);
 
     return ESP_OK;
@@ -786,7 +786,7 @@ esp_err_t bme680_get_results_fixed(bme680_t *dev, bme680_values_fixed_t *results
             ESP_LOGW(TAG, "Heater is not stable");
     }
 
-    ESP_LOGD(TAG, "Fixed point sensor values - %d/100 deg.C, %d/1000 %%, %d Pa, %d Ohm",
+    ESP_LOGD(TAG, "Fixed point sensor values - %d/100 deg.C, %lu/1000 %%, %lu Pa, %lu Ohm",
             results->temperature, results->humidity, results->pressure, results->gas_resistance);
 
     return ESP_OK;

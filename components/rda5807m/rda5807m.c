@@ -427,7 +427,7 @@ esp_err_t rda5807m_set_band(rda5807m_t *dev, rda5807m_band_t band)
 
     dev->band = band;
 
-    ESP_LOGD(TAG, "Band: %d..%d kHz", band_limits[band].lower, band_limits[band].upper);
+    ESP_LOGD(TAG, "Band: %lu..%lu kHz", band_limits[band].lower, band_limits[band].upper);
 
     return ESP_OK;
 }
@@ -472,7 +472,7 @@ esp_err_t rda5807m_set_frequency_khz(rda5807m_t *dev, uint32_t frequency)
 
     if (frequency < band_limits[dev->band].lower || frequency > band_limits[dev->band].upper)
     {
-        ESP_LOGE(TAG, "Could not set frequency: %d kHz is out of bounds (%d..%d)",
+        ESP_LOGE(TAG, "Could not set frequency: %lu kHz is out of bounds (%lu..%lu)",
                 frequency, band_limits[dev->band].lower, band_limits[dev->band].upper);
         return ESP_ERR_INVALID_ARG;
     }
@@ -480,14 +480,14 @@ esp_err_t rda5807m_set_frequency_khz(rda5807m_t *dev, uint32_t frequency)
     uint16_t chan = (frequency - band_limits[dev->band].lower) / spacings[dev->spacing];
     if (chan > MAX_CHAN)
     {
-        ESP_LOGE(TAG, "Could not set frequency to %d kHz with current band/spacing settings", frequency);
+        ESP_LOGE(TAG, "Could not set frequency to %lu kHz with current band/spacing settings", frequency);
         return ESP_ERR_INVALID_ARG;
     }
 
     CHECK(update_register(dev, REG_CHAN, MASK_CHAN_CHAN | BV(BIT_CHAN_TUNE),
             (chan << BIT_CHAN_CHAN) | BV(BIT_CHAN_TUNE)));
 
-    ESP_LOGD(TAG, "Frequency: %d kHz", chan * spacings[dev->spacing] + band_limits[dev->band].lower);
+    ESP_LOGD(TAG, "Frequency: %lu kHz", chan * spacings[dev->spacing] + band_limits[dev->band].lower);
 
     return ESP_OK;
 }

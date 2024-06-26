@@ -49,6 +49,8 @@
 #include <esp32h2/rom/ets_sys.h>
 #elif CONFIG_IDF_TARGET_ESP32C2
 #include <esp32c2/rom/ets_sys.h>
+#elif CONFIG_IDF_TARGET_ESP32C6
+#include <esp32c6/rom/ets_sys.h>
 #endif
 #include <esp_idf_lib_helpers.h>
 #include "hx711.h"

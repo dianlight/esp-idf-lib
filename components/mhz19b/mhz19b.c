@@ -63,7 +63,7 @@ esp_err_t mhz19b_init(mhz19b_dev_t *dev, uart_port_t uart_port, gpio_num_t tx_gp
         .stop_bits = UART_STOP_BITS_1,
         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 3, 0)
-        .source_clk = UART_SCLK_APB,
+    //.source_clk = UART_SCLK_APB,
 #endif
     };
     CHECK(uart_driver_install(uart_port, MHZ19B_SERIAL_BUF_LEN * 2, 0, 0, NULL, 0));
